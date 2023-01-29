@@ -1,0 +1,34 @@
+---
+- name: Flatpaks
+  hosts: 
+    - localhost
+  tasks:
+  - name: Install flatpak
+    ansible.builtin.package:
+      name:
+        - flatpak
+      state: latest
+    become: true
+    tags: packages
+  - name: Add the flathub flatpak repository remote to the user installation
+    community.general.flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      method: user
+  - name: Install flatpaks
+    community.general.flatpak:
+      name:
+        - us.zoom.Zoom
+        - com.mattermost.Desktop
+        - com.slack.Slack
+        - com.visualstudio.code
+        - org.signal.Signal
+        - org.mozilla.Thunderbird
+        - com.valvesoftware.Steam
+        - org.keepassxc.KeePassXC
+        - com.github.wwmm.easyeffects
+        - com.github.tchx84.Flatseal
+      remote: flathub
+      method: user
+

@@ -1,0 +1,43 @@
+---
+- name: SDKs (java, nodejs)
+  hosts: 
+    - localhost
+  roles:
+  - role: gantsign.sdkman
+    sdkman_users:
+        - "{{ ansible_user_id }}"
+  - role: gantsign.sdkman_init
+    users:
+      - username: "{{ ansible_user_id }}"
+        sdkman_install:
+          - candidate: java
+            version: '11.0.17-tem'
+          - candidate: java
+            version: '17.0.5-tem'
+          - candidate: gradle
+            version: '7.6'
+        sdkman_default:
+          java: '17.0.5-tem'
+  - role: morgangraphics.ansible_role_nvm
+    default: true
+    nodejs_version: "16"
+    nvm_profile: "/home/{{ ansible_user_id }}/.zshrc"
+  - role: robertdebock.npm
+    become: true
+  tasks:
+  - name: Install development
+    ansible.builtin.package:
+      name:
+        - maven
+    become: true
+  - name: npm yarn
+    npm:
+      name: yarn
+      global: yes
+    become: true
+  - name: Update sdk config
+    lineinfile:
+      dest: ~/.sdkman/etc/config
+      regexp: 'sdkman_auto_env=false'
+      line: 'sdkman_auto_env=true'
+      create: yes  

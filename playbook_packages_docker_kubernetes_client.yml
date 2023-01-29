@@ -1,0 +1,32 @@
+---
+- name: Docker/Kubernetes
+  hosts: 
+    - localhost
+  roles:
+  tasks:
+  - name: Install docker, kubernetes, etc packages
+    ansible.builtin.package:
+      name:
+        - docker
+#        - terraform
+#        - k9s
+#        - helm
+        - kubernetes-client
+#        - kubectx
+#        - kubens
+      state: latest
+    become: true
+    tags: packages
+  - name: change to zsh
+    ansible.builtin.user:
+      name: "{{ ansible_user_id }}"
+      shell: /bin/zsh
+ #     groups: "docker"
+      append: true
+    become: true
+#  - name: Enable docker daemon
+#    service:
+#      name: docker
+#      state: started
+#      enabled: yes
+#    become: true
