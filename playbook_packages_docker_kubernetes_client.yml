@@ -7,7 +7,7 @@
   - name: Install docker, kubernetes, etc packages
     ansible.builtin.package:
       name:
-        - docker
+        - docker.io
 #        - terraform
 #        - k9s
 #        - helm
@@ -21,7 +21,7 @@
     ansible.builtin.user:
       name: "{{ ansible_user_id }}"
       shell: /bin/zsh
- #     groups: "docker"
+      groups: "docker"
       append: true
     become: true
 #  - name: Enable docker daemon
