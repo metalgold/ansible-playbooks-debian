@@ -7,8 +7,8 @@
   - name: Install kde packages
     ansible.builtin.package:
       name:
-        - pam_kwallet
-        - plasma5-workspace-wallpapers
+        - libpam-kwallet5
+        - plasma-workspace-wallpapers
       state: latest
     become: true
     tags: packages
