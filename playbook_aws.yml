@@ -4,7 +4,10 @@
     - localhost
   roles:
   tasks:
-  #todo aws-cli package
+  - name: Install aws-cli
+    ansible.builtin.package:
+      name:
+        - awscli
   - name: Check if saml2aws is already installed
     stat:
       path: /usr/local/bin/saml2aws
