@@ -8,13 +8,12 @@
 #  import_playbook: playbook_packages_apps.yml
 - name: zsh
   import_playbook: playbook_zsh.yml
-#- name: kde
-#  import_playbook: playbook_packages_kde.yml
+- name: kde
+  import_playbook: playbook_packages_kde.yml
 #- name: gnome
 #  import_playbook: playbook_gnome.yml
-# todo aws
-#- name: aws
-#  import_playbook: playbook_aws.yml
+- name: aws
+  import_playbook: playbook_aws.yml
 - name: filelimits
   import_playbook: playbook_filelimits.yml
 - name: packages
